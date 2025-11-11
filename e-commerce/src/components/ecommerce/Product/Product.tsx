@@ -1,0 +1,63 @@
+
+import { Button, Spinner } from "react-bootstrap";
+import styles from "./styles.module.css";
+import { TProduct } from "src/Types/product";
+import { useAppDispatch } from "src/redux/hook";
+import { addToCart } from "src/redux/cart/cartSlice";
+import { memo, useEffect, useState } from "react";
+import { BeatLoader } from "react-spinners";
+import Like from '../../../assets/SVG/like.svg?react'
+import LikeFill from '../../../assets/SVG/like-fill.svg?react'
+import { actLikeToggle } from "src/redux/wishlist/wishlistSlice";
+
+const { product, productImg ,maximumNotice ,wishListBtn } = styles;
+
+const Product = memo(({ title, price, img,id, max , quntity ,isLiked }: TProduct) => {
+  const currentRemainQuantity = max -(quntity  ?? 0)
+  console.log(quntity);
+  
+  const QuantityReachedToMax= currentRemainQuantity <= 0 ? true :false;
+  console.log(img );
+  const [isBtnDisabled,setIsBtnDisabled]=useState(false)
+  useEffect(()=>{
+    if(!isBtnDisabled){
+      return
+    }
+    setIsBtnDisabled(true)
+    const debounce=setTimeout(() => {
+      setIsBtnDisabled(false)
+    }, 300);
+    return()=>clearTimeout(debounce)
+  },[isBtnDisabled])
+  const dispatch =useAppDispatch();
+  const addToCartHandler =()=>{
+    dispatch(addToCart(id))
+    setIsBtnDisabled(true)
+  }
+  const [isLoading,setIsLoading]=useState(false)
+  const likeToggleHandler = ()=>{
+    if(isLoading){
+      return;
+    }
+    setIsLoading(true);
+    dispatch(actLikeToggle(id)).unwrap().then(()=>setIsLoading(false)).catch(()=>setIsLoading(false))
+  }
+  return (
+    <div className={product}>
+      <div className={wishListBtn} onClick={likeToggleHandler}>
+        {isLoading?<Spinner animation="border" size="sm" variant="primary"/> : isLiked? <LikeFill/> : <Like/>}
+      </div>
+      <div className={productImg}>
+        <img src={img} alt={title} />
+      </div>
+      <h2>{title}</h2>
+      <h3>{price.toFixed(2)} EGP</h3>
+      <p className={maximumNotice}>{QuantityReachedToMax ? "You reached your limit" : `You Can Add ${currentRemainQuantity} item(s)`}</p>
+      <Button disabled={isBtnDisabled || QuantityReachedToMax} onClick={addToCartHandler} variant="info" style={{ color: "white" }}>
+        {isBtnDisabled ? <> <BeatLoader color="green" size={10}/> Loading....</> : "Add To Cart"}
+      </Button>
+    </div>
+  );
+});
+
+export default Product;
