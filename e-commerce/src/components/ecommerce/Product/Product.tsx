@@ -12,9 +12,9 @@ import { actLikeToggle } from "src/redux/wishlist/wishlistSlice";
 
 const { product, productImg ,maximumNotice ,wishListBtn } = styles;
 
-const Product = memo(({ title, price, img,id, max , quntity ,isLiked }: TProduct) => {
-  const currentRemainQuantity = max -(quntity  ?? 0)
-  console.log(quntity);
+const Product = memo(({ title, price, img,id, max , quantity ,isLiked }: TProduct) => {
+  const currentRemainQuantity = max -(quantity  ?? 0)
+  console.log(quantity);
   
   const QuantityReachedToMax= currentRemainQuantity <= 0 ? true :false;
   console.log(img );

@@ -57,8 +57,8 @@ const cartSlice =createSlice({
             state.items[action.payload.id]=action.payload.quantity
         },
         cartItemRemove:(state,action)=>{
-            delete state.items[action.payload.id];
-            state.productFullInfo=state.productFullInfo.filter(el=> el.id !== action.payload.id)
+            delete state.items[action.payload];
+            state.productFullInfo=state.productFullInfo.filter(el=> el.id !== action.payload)
         }, 
         cleanCartProductsInfo:(state)=>{
             state.productFullInfo=[];
