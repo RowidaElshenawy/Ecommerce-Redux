@@ -1,5 +1,5 @@
 
-import { TProduct } from "src/Types/product"
+import { TProduct } from "@types"
 import Styles from "./styles.module.css"
 type TCartSubtotalProps={products:TProduct[]}
 const CartSubTotalPrice = ({products}:TCartSubtotalProps) => {

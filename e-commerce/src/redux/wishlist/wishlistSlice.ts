@@ -2,8 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import actLikeToggle from './act/actLikeToggle';
 import actGetWishlist from './act/actGetWishlist';
 // import Loading from './../../components/feedback/Loading/Loading';
-import { TLoading } from "src/Types/shared";
-import { TProduct } from "src/Types/product";
+import { TLoading ,TProduct} from "@types";
 // import { productsCleanUp } from "../productes/ProductSlice";
 // import { Product } from '@components/ecommerce/Product/Product';
 

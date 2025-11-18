@@ -2,7 +2,7 @@ import Product from '@components/ecommerce/Product/Product'
 import Loading from '@components/feedback/Loading/Loading'
 import { GridList, Heading } from '@components/shared'
 import useWishlist from '@hooks/useWishlist'
-import { TProduct } from 'src/Types/product'
+import { TProduct } from '@types'
 
 
 const Wishlist = () => {

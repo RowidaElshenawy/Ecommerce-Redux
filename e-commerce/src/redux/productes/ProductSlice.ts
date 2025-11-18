@@ -1,7 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import actGetProductsByCatPrefix from "./act/actGetProductsByCatPrefix";
-import { TLoading } from "src/Types/shared";
-import { TProduct } from 'src/Types/product';
+import { TLoading ,TProduct} from "@types";
 interface IProductsState{
     records:TProduct[];
     loading:TLoading;

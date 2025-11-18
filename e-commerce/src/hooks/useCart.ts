@@ -1,6 +1,6 @@
 import { useCallback, useEffect } from 'react';
-import { actGetProductsByItems, cartItemChangeQuantity, cartItemRemove, cleanCartProductsInfo } from 'src/redux/cart/cartSlice';
-import { useAppDispatch, useAppSelector } from 'src/redux/hook';
+import { actGetProductsByItems, cartItemChangeQuantity, cartItemRemove, cleanCartProductsInfo } from '@redux/cart/cartSlice';
+import { useAppDispatch, useAppSelector } from '@redux/hook';
 const useCart = () => {
     const dispatch =useAppDispatch()
     const {loading ,error,productFullInfo,items} =useAppSelector((state)=>state.cart)
@@ -16,9 +16,10 @@ const useCart = () => {
     },[dispatch])
     
     useEffect(()=>{
-        dispatch(actGetProductsByItems())
+        const promise = dispatch(actGetProductsByItems())
         return()=>{
-            dispatch(cleanCartProductsInfo())
+            dispatch(cleanCartProductsInfo());
+            promise.abort();
         }
     
     }

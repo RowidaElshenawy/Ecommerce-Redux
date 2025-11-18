@@ -4,7 +4,7 @@ import Loading from '@components/feedback/Loading/Loading';
 import { GridList, Heading } from '@components/shared';
 import useCategories from '@hooks/useCategories';
 import { Container} from 'react-bootstrap';
-import { Tcategory } from 'src/Types/category';
+import { Tcategory } from '@types';
 
 
 const Categories = () => {

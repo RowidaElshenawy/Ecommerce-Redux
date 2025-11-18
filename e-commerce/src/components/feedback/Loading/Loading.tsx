@@ -1,5 +1,5 @@
 
-import { TLoading } from 'src/Types/shared';
+import { TLoading } from '@types';
 
 
 

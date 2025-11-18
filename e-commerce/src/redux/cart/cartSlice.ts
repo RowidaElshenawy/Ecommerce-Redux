@@ -1,9 +1,9 @@
 import {  createSlice } from "@reduxjs/toolkit";
 // import { RootState } from "@reduxjs/toolkit/query";
-import { TProduct } from "src/Types/product";
-import { getCartTotalQuantity } from 'src/redux/cart/selectors';
+import { TProduct,TLoading } from "@types";
+import { getCartTotalQuantity } from './selectors';
 import actGetProductsByItems from "./act/actGetProductsByItems";
-import { TLoading } from "src/Types/shared";
+
 
 
 // const getCartTotalQuantity =(state)=>{

@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { useAppDispatch, useAppSelector } from "src/redux/hook";
-import { actGetProductsByCatPrefix, productsCleanUp } from "src/redux/productes/ProductSlice";
+import { useAppDispatch, useAppSelector } from "@redux/hook";
+import { actGetProductsByCatPrefix, productsCleanUp } from "@redux/productes/ProductSlice";
 const useProducts = () => {
     const params = useParams();
     const productPrefix=params.prefix
@@ -16,10 +16,11 @@ const useProducts = () => {
   
 
   useEffect(() => {
-    dispatch(actGetProductsByCatPrefix(productPrefix as string));
+    const promise = dispatch(actGetProductsByCatPrefix(productPrefix as string));
 
     return () => {
       dispatch(productsCleanUp());
+      promise.abort();
     };
   }, [dispatch, params]);
   return {loading,error,productFullInfo,productPrefix}

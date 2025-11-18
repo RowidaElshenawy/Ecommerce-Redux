@@ -1,7 +1,7 @@
 
 import { Button, Form } from 'react-bootstrap'
 import Styles from "./styles.module.css"
-import { TProduct } from 'src/Types/product'
+import { TProduct } from '@types'
 import { memo } from 'react'
 const{cartItem ,product ,productImg,productInfo,cartItemSelection}=Styles
 type TCartItemsProps =TProduct & {

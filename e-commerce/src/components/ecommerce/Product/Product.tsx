@@ -1,14 +1,14 @@
 
 import { Button, Spinner } from "react-bootstrap";
 import styles from "./styles.module.css";
-import { TProduct } from "src/Types/product";
-import { useAppDispatch } from "src/redux/hook";
-import { addToCart } from "src/redux/cart/cartSlice";
+import { TProduct } from "@types";
+import { useAppDispatch } from "@redux/hook";
+import { addToCart } from "@redux/cart/cartSlice";
 import { memo, useEffect, useState } from "react";
 import { BeatLoader } from "react-spinners";
 import Like from '../../../assets/SVG/like.svg?react'
 import LikeFill from '../../../assets/SVG/like-fill.svg?react'
-import { actLikeToggle } from "src/redux/wishlist/wishlistSlice";
+import { actLikeToggle } from "@redux/wishlist/wishlistSlice";
 
 const { product, productImg ,maximumNotice ,wishListBtn } = styles;
 

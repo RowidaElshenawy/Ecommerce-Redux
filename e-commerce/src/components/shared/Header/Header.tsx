@@ -11,7 +11,7 @@ const Header = () => {
     <header>
       <div className={headerContainer}>
         <h1 className={headerLogo}>
-            <span>Our</span> <Badge>Ecommerce</Badge>
+            <span>Our</span> <Badge>eCommerce</Badge>
         </h1>
         <HeaderLeftBar/>
         </div>

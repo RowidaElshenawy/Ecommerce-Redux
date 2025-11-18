@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
-import { actGetCategories, categoriesRecordsCleanup } from 'src/redux/categories/CategoriesSlice';
-import { useAppDispatch, useAppSelector } from 'src/redux/hook';
+import { actGetCategories, categoriesRecordsCleanup } from '@redux/categories/CategoriesSlice';
+import { useAppDispatch, useAppSelector } from '@redux/hook';
 
 const useCategories = () => {
      const dispatch = useAppDispatch()
@@ -8,9 +8,10 @@ const useCategories = () => {
  
    useEffect(() => {
     
-      dispatch(actGetCategories());
+      const promise =dispatch(actGetCategories());
       return ()=>{
-        dispatch(categoriesRecordsCleanup())
+        dispatch(categoriesRecordsCleanup());
+        promise.abort();
       }
   }, [dispatch]);
   return {loading,error,records}

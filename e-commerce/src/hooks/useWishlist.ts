@@ -1,12 +1,15 @@
 import { useEffect } from 'react'
-import { useAppDispatch, useAppSelector } from 'src/redux/hook'
-import { productsCleanUp } from 'src/redux/productes/ProductSlice'
-import { actGetWishlist } from 'src/redux/wishlist/wishlistSlice'
+import { useAppDispatch, useAppSelector } from '@redux/hook'
+import { productsCleanUp } from '@redux/productes/ProductSlice'
+import { actGetWishlist } from '@redux/wishlist/wishlistSlice'
 const useWishlist = () => {
      const dispatch=useAppDispatch()
     useEffect(()=>{
-        dispatch(actGetWishlist());
-        return()=>{dispatch(productsCleanUp())}
+       const promise= dispatch(actGetWishlist());
+        return()=>{
+          dispatch(productsCleanUp());
+          promise.abort();
+        }
     },[dispatch])
     const {productFullInfo,error,loading}=useAppSelector((state)=>state.wishlist);
     const cartItems =useAppSelector((state)=>state.cart.items)

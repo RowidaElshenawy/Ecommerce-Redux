@@ -1,7 +1,7 @@
 
 
-import { useAppSelector } from 'src/redux/hook';
-import { getCartTotalQuantity } from 'src/redux/cart/selectors';
+import { useAppSelector } from '@redux/hook';
+import { getCartTotalQuantity } from '@redux/cart/selectors';
 import WishlistIcon from "@assets/SVG/wishlist.svg?react"
 import CartIcon from "@assets/SVG/cart.svg?react" 
 import HeaderCounter from '../HeaderCounter/HeaderCounter';
