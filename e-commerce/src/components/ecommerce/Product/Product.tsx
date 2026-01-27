@@ -1,5 +1,5 @@
 
-import { Button, Spinner } from "react-bootstrap";
+import { Button, Modal, Spinner } from "react-bootstrap";
 import styles from "./styles.module.css";
 import { TProduct } from "@types";
 import { useAppDispatch } from "@redux/hook";
@@ -12,7 +12,8 @@ import { actLikeToggle } from "@redux/wishlist/wishlistSlice";
 
 const { product, productImg ,maximumNotice ,wishListBtn } = styles;
 
-const Product = memo(({ title, price, img,id, max , quantity ,isLiked }: TProduct) => {
+const Product = memo(({ title, price, img,id, max , quantity ,isLiked ,isAuthenticated}: TProduct) => {
+  const[showModal,setShowModal]=useState(false)
   const currentRemainQuantity = max -(quantity  ?? 0)
   console.log(quantity);
   
@@ -36,13 +37,26 @@ const Product = memo(({ title, price, img,id, max , quantity ,isLiked }: TProduc
   }
   const [isLoading,setIsLoading]=useState(false)
   const likeToggleHandler = ()=>{
-    if(isLoading){
+   if(isAuthenticated){
+     if(isLoading){
       return;
     }
     setIsLoading(true);
     dispatch(actLikeToggle(id)).unwrap().then(()=>setIsLoading(false)).catch(()=>setIsLoading(false))
+   }else{
+    setShowModal(true)
+   }
   }
   return (
+    <>
+    <Modal show={showModal} onHide={() => setShowModal(false)}>
+      <Modal.Header closeButton>
+        <Modal.Title>Login Required</Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
+        You need to login first to add this item to your wishlist.
+      </Modal.Body>
+    </Modal>
     <div className={product}>
       <div className={wishListBtn} onClick={likeToggleHandler}>
         {isLoading?<Spinner animation="border" size="sm" variant="primary"/> : isLiked? <LikeFill/> : <Like/>}
@@ -57,6 +71,8 @@ const Product = memo(({ title, price, img,id, max , quantity ,isLiked }: TProduc
         {isBtnDisabled ? <> <BeatLoader color="green" size={10}/> Loading....</> : "Add To Cart"}
       </Button>
     </div>
+    </>
+   
   );
 });
 

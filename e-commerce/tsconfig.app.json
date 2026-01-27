@@ -30,7 +30,9 @@
       "@services/*":["src/services/*"],
       "@pages/*":["src/pages/*"],
       "@types/*":["src/types/*"],
-      "@types":["src/types/index"]
+      "@types":["src/types/index"],
+      "@validations/*":["src/validations/*"]
+
     },
     /* Linting */
     "strict": true,

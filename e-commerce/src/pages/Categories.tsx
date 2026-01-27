@@ -13,7 +13,7 @@ const Categories = () => {
     <Container>
       <Loading loading={loading} error={error}>
         <Heading title={"Categories"}/>
-        <GridList records={records} renderItem={(record:Tcategory)=><Category {...record}/>}/>
+        <GridList emptyMessage="There are No Categories" records={records} renderItem={(record:Tcategory)=><Category {...record}/>}/>
       </Loading>
     </Container>
   )

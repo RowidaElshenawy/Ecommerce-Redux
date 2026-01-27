@@ -8,6 +8,9 @@
 // import Error from './../pages/Error';
 // import Cart from 'src/pages/Cart';
 // import Wishlist from 'src/pages/Wishlist';
+import ProtectedRoutes from "@components/Auth/ProtectedRoutes";
+import { LottieHandler } from "@components/feedback";
+import PageSuspenseFallback from "@components/feedback/PageSuspenseFallback/PageSuspenseFallback";
 import {lazy, Suspense} from "react";
 const MainLayout = lazy(()=>import("@layouts/MainLayout/MainLayout"));
 const AboutUs = lazy(()=>import("@pages/AboutUs"));
@@ -19,13 +22,15 @@ const Register =lazy(()=>import("@pages/Register"));
 const Error =lazy(()=>import("./../pages/Error"));
 const Cart =lazy(()=>import("@pages/Cart"));
 const Wishlist =lazy(()=>import("@pages/Wishlist"));
+const Profile =lazy(()=>import("@pages/Profile"))
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
+
 const router = createBrowserRouter([
-    {path:"/",element:<Suspense fallback="Loading ..."><MainLayout/></Suspense>, errorElement:<Suspense fallback="Loading ..."><Error/></Suspense>,children:[
-      {index:true,element:<Suspense fallback="Loading ..."><Home/></Suspense>},
-      {path:"categories",element:<Suspense fallback="Loading ..."><Categories/></Suspense>},
-      {path:"categories/products/:prefix",element:<Suspense fallback="Loading ..."><Products/></Suspense>,loader:({params})=>{
+    {path:"/",element:<Suspense fallback={<div style={{marginTop:"10%"}}><LottieHandler type="loading" message="loading.... "/></div>}><MainLayout/></Suspense>, errorElement:<Suspense fallback="Loading ..."><Error/></Suspense>,children:[
+      {index:true,element:<PageSuspenseFallback><Home/></PageSuspenseFallback>},
+      {path:"categories",element:<PageSuspenseFallback><Categories/></PageSuspenseFallback>},
+      {path:"categories/products/:prefix",element:<PageSuspenseFallback><Products/></PageSuspenseFallback>,loader:({params})=>{
         console.log(params.prefix);
         if(typeof params.prefix !== "string" ||!/^[a-z]+$/i.test(params.prefix) ){
             throw new Response ("Bad Request",{
@@ -35,11 +40,12 @@ const router = createBrowserRouter([
         }
         return true;
       }},
-      {path:"about-us",element:<Suspense fallback="Loading ..."><AboutUs/></Suspense>},
-      {path:"login",element:<Suspense fallback="Loading ..."><Login/></Suspense>},
-      {path:"register",element:<Suspense fallback="Loading ..."><Register/></Suspense>},
-      {path:"cart",element:<Suspense fallback="Loading ..."><Cart/></Suspense>},
-      {path:"wishlist",element:<Suspense fallback="Loading ..."><Wishlist/></Suspense>}
+      {path:"about-us",element:<PageSuspenseFallback><AboutUs/></PageSuspenseFallback>},
+      {path:"login",element:<PageSuspenseFallback><Login/></PageSuspenseFallback>},
+      {path:"register",element:<PageSuspenseFallback><Register/></PageSuspenseFallback>},
+      {path:"cart",element:<PageSuspenseFallback><Cart/></PageSuspenseFallback>},
+      {path:"wishlist",element:<ProtectedRoutes><PageSuspenseFallback><Wishlist/></PageSuspenseFallback></ProtectedRoutes>},
+      {path:"profile",element:<ProtectedRoutes><PageSuspenseFallback><Profile/></PageSuspenseFallback></ProtectedRoutes>},
     ]}
 ]);
 
