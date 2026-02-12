@@ -28,6 +28,7 @@ const wishlistSlice =createSlice({
         }
     },
     extraReducers:(builder)=>{
+        // act like toggle
         builder.addCase(actLikeToggle.pending , (state)=>{
             state.error=null
         });
@@ -35,8 +36,8 @@ const wishlistSlice =createSlice({
             if(action.payload.type === "add"){
                 state.itemsId.push(action.payload.id)
             }else{
-                state.itemsId=state.itemsId.filter(el => el !== action.payload.id)
-                state.productFullInfo=state.productFullInfo.filter(el=> el.id !== action.payload.id)
+                state.itemsId=state.itemsId.filter((el) => el !== action.payload.id)
+                state.productFullInfo=state.productFullInfo.filter((el)=> el.id !== action.payload.id)
             }
         });
         builder.addCase(actLikeToggle.rejected , (state,action)=>{
@@ -53,12 +54,11 @@ const wishlistSlice =createSlice({
             state.loading="succeeded";
             if(action.payload.dataType ==="productsFullInfo"){
                 state.productFullInfo=action.payload.data as TProduct[];
-            }else if(action.payload.dataType ==="productaIds"){
+            }else if(action.payload.dataType ==="productIds"){
                 state.itemsId=action.payload.data as number[]
-            }else{
-                state.productFullInfo=[]
-                state.itemsId=[]
-            }
+                
+                
+}
             
         });
         builder.addCase(actGetWishlist.rejected,(state,action)=>{
@@ -68,7 +68,7 @@ const wishlistSlice =createSlice({
             }
         })
         //logout reset
-        builder.addCase(authLogout,state=>{
+        builder.addCase(authLogout,(state)=>{
             state.itemsId=[];
             state.productFullInfo=[]
         })

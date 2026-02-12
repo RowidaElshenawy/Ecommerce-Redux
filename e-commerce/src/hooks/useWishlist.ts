@@ -7,15 +7,16 @@ const useWishlist = () => {
      const dispatch=useAppDispatch()
     useEffect(()=>{
        const promise= dispatch(actGetWishlist("productsFullInfo"));
+       console.log(promise)
         return()=>{
-          dispatch(productsCleanUp());
+          // dispatch(productsCleanUp());
           promise.abort();
         }
     },[dispatch])
     const {productFullInfo,error,loading}=useAppSelector((state)=>state.wishlist);
     const cartItems =useAppSelector((state)=>state.cart.items)
-    const records=productFullInfo.map(el=> (
-  {...el,quntity:cartItems[el.id]||0 , isLiked:true,isAuthenticated:userAccessToken?true:false}))
+    const records=productFullInfo.map((el)=> (
+  {...el,quantity:cartItems[el.id]||0 , isLiked:true,isAuthenticated:userAccessToken?true:false}))
   return {error , loading ,records}
 }
 

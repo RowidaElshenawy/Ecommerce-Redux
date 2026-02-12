@@ -23,7 +23,7 @@ const HeaderCounter = ({totalQuantity,svgIcon,page,title}:THeaderCounterProps) =
   const navigate =useNavigate()
   useEffect(()=>{
     if(!totalQuantity){
-      return
+      return;
     }
     setIsAnimate(true)
     const debounce=setTimeout(() => {

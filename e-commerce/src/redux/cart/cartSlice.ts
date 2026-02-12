@@ -58,23 +58,30 @@ const cartSlice =createSlice({
         },
         cartItemRemove:(state,action)=>{
             delete state.items[action.payload];
-            state.productFullInfo=state.productFullInfo.filter(el=> el.id !== action.payload)
+            state.productFullInfo=state.productFullInfo.filter((el)=> el.id !== action.payload)
         }, 
         cleanCartProductsInfo:(state)=>{
             state.productFullInfo=[];
+        },
+        clearCartAfterPlaceOrder:(state)=>{
+            state.items={};
+            state.productFullInfo=[]
+
         }
+        
     },
     extraReducers:(builder)=>{
         builder.addCase(actGetProductsByItems.pending,
             (state)=>{
                 state.loading ="pending"
-                state.error ="null"
+                state.error =null
             }
         );
         builder.addCase(actGetProductsByItems.fulfilled,
             (state,action)=>{
                 state.loading ="succeeded"
                 state.productFullInfo = action.payload
+                console.log(action.payload)
             }
         )
         builder.addCase(actGetProductsByItems.rejected,
@@ -88,6 +95,6 @@ const cartSlice =createSlice({
     }
 });
 export default cartSlice.reducer;
-export const {addToCart,cartItemChangeQuantity,cartItemRemove,cleanCartProductsInfo} = cartSlice.actions;
+export const {addToCart,cartItemChangeQuantity,cartItemRemove,cleanCartProductsInfo,clearCartAfterPlaceOrder} = cartSlice.actions;
 export {getCartTotalQuantity ,actGetProductsByItems}
 

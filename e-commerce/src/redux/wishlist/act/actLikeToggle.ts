@@ -13,7 +13,7 @@ const actLikeToggle = createAsyncThunk("wishlist/actLikeToggle",async(id:number,
             await axios.delete(`/withlist/${isRecordExist.data[0].id}`);
             return {type:"remove" ,id}
         }else{
-            await axios.post("/withlist", {userId:'1' , productId:id})
+            await axios.post("/withlist", {userId:1 , productId:id})
             return {type:"add" ,id}
         }
     }catch(error){

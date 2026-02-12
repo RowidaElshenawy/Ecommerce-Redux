@@ -23,7 +23,10 @@ const Error =lazy(()=>import("./../pages/Error"));
 const Cart =lazy(()=>import("@pages/Cart"));
 const Wishlist =lazy(()=>import("@pages/Wishlist"));
 const Profile =lazy(()=>import("@pages/Profile"))
+const ProfileLayout=lazy(()=>import("@layouts/ProfileLayout/ProfileLayout"));
+const Orders=lazy(()=>import("@pages/Orders"))
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+
 
 
 const router = createBrowserRouter([
@@ -45,7 +48,10 @@ const router = createBrowserRouter([
       {path:"register",element:<PageSuspenseFallback><Register/></PageSuspenseFallback>},
       {path:"cart",element:<PageSuspenseFallback><Cart/></PageSuspenseFallback>},
       {path:"wishlist",element:<ProtectedRoutes><PageSuspenseFallback><Wishlist/></PageSuspenseFallback></ProtectedRoutes>},
-      {path:"profile",element:<ProtectedRoutes><PageSuspenseFallback><Profile/></PageSuspenseFallback></ProtectedRoutes>},
+      {path:"profile",element:<ProtectedRoutes><PageSuspenseFallback><ProfileLayout/></PageSuspenseFallback></ProtectedRoutes>,children:[
+        {index:true,element:<PageSuspenseFallback><Profile/></PageSuspenseFallback>},
+        {path:"orders",element:<PageSuspenseFallback><Orders/></PageSuspenseFallback>}
+      ]},
     ]}
 ]);
 

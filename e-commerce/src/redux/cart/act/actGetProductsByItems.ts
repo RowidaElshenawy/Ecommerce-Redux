@@ -16,8 +16,9 @@ async(_,thunkAPI)=>{
     console.log(itemsId);
     const concatenatedItemsId =itemsId.map(el=>`id=${el}`).join("&")
     console.log(concatenatedItemsId);
+    // لو ماعنديش id =>مايروحش يبعت للباك اند  يرجع في =>productfullinfo=[]=>success process
     if(!itemsId.length){
-        fulfillWithValue([])
+        return fulfillWithValue([])
     }
     try{
         const response =await axios.get<TResponse>(`/products?${concatenatedItemsId}`,{signal})

@@ -43,9 +43,9 @@ const Header = () => {
               <Nav.Link as={NavLink} to={"register"}>Register</Nav.Link>
             </>:
             <>
-              <NavDropdown title={`Welcome : ${user?.firstName} ${user?.lastName}`} id="basic-nav-dropdown">
-                <NavDropdown.Item to="profile" as={NavLink}>Profile</NavDropdown.Item>
-                <NavDropdown.Item  >Orders</NavDropdown.Item>
+              <NavDropdown title={`Welcome : ${user?.firstName} ${user?.lastName}`} id="basic-nav-dropdown" >
+                <NavDropdown.Item to="profile" as={NavLink} end>Profile</NavDropdown.Item>
+                <NavDropdown.Item to="profile/orders" as={NavLink} >Orders</NavDropdown.Item>
                 <NavDropdown.Divider />
                 <NavDropdown.Item to="/" as={NavLink} onClick={()=>{dispatch(authLogout())}}>Logout</NavDropdown.Item>
               </NavDropdown>
